@@ -17,9 +17,9 @@
 
 class PdoGsb{   		
       	private static $serveur='mysql:host=localhost';
-      	private static $bdd='dbname=bd_gsb';   		
+      	private static $bdd='dbname=gsb_symfony';   		
       	private static $user='root' ;    		
-      	private static $mdp='' ;	
+      	private static $mdp='simone' ;	
 	private static $monPdo;
 	private static $monPdoGsb=null;
 /**
@@ -384,5 +384,12 @@ class PdoGsb{
             return $ligne['nb'];
 
         }
+
+public function getTablettes(){
+        $req = "select tablette.idTablette as id, tablette.typeTablette as typeTablette,  tablette.memoireInt as memoireInt, tablette.memoireExt as memoireExt from tablette ";
+        $stmt = PdoGsb::$monPdo->prepare($req);
+                $stmt->execute();
+        $lesLignes = $stmt->fetchAll();
+        return $lesLignes;
 }
 ?>

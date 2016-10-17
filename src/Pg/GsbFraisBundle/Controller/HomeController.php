@@ -21,6 +21,17 @@ class HomeController extends Controller
         $session= $this->get('request')->getSession();
         $request = $this->get('request');
         $login =  $request->request->get('login');
+        
+
+
+        if ($login == "DAF" ) { 
+          $session->set('EstDaf', true);
+        }
+        else {
+          $session->set('EstDaf', false);
+        }
+       
+
         $mdp = $request->request->get('mdp');
         //$pdo = PdoGsb::getPdoGsb();
         $pdo = $this->get('pg_gsb_frais.pdo');
@@ -33,6 +44,7 @@ class HomeController extends Controller
             $session->set('id',$visiteur['id']);
             $session->set('nom',$visiteur['nom']);
             $session->set('prenom',$visiteur['prenom']);
+             
             return $this->render('PgGsbFraisBundle::accueil.html.twig');
         }
     } 
@@ -41,5 +53,12 @@ class HomeController extends Controller
         $session->clear();
         return $this->render('PgGsbFraisBundle:Home:connexion.html.twig');
    }
+
+   public function dafAction()
+    {
+      $pdo = $this->get('pg_gsb_frais.pdo');
+      $tablettes = $pdo->getTablettes();
+     return $this->render('PgGsbFraisBundle:Home:daf.html.twig', array( "tablette" => $tablettes ));
+    }
 }
 ?>
