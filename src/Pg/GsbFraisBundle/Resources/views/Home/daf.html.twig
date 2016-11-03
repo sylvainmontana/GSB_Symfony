@@ -5,7 +5,7 @@
 
 {{parent()}}
 
-
+     {% if app.session.get('EstDaf') == true %}
       <h2 style="text-align: center;">     
       
 
@@ -17,6 +17,7 @@
        <th style="border: 1px solid black;"> Mémoire Interne</th>
        <th style="border: 1px solid black;"> Mémoire Externe</th>
        </tr>
+
        {%for t in tablette%} 
        <tr style="border: 1px solid black;">
        <td style="border: 1px solid black;">{{t.id}}</td>
@@ -30,6 +31,7 @@
 </h2>
 
 
+{%endif%}
 
 
        
